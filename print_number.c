@@ -14,7 +14,7 @@ void print_number(int n)
 	{
 		d = (num / divis) % 10;
 		sum += d;
-		if(sum != 0)
+		if (sum != 0)
 			_putchar(d + '0');
 		divis = divis / 10;
 	}

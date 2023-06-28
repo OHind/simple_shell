@@ -5,7 +5,6 @@
  * @input_user: the commad entered by the user
  * Return: void
  */
-int errorcount, exitcode;
 void handle_exit_error(char *N, char *input_user)
 {
 	char *token;
@@ -30,7 +29,7 @@ void handle_exit_error(char *N, char *input_user)
  */
 
 void handle_command_error(char *NAME, char *command)
-{ 
+{
 	write(STDERR_FILENO, NAME, _strlen(NAME));
 	write(STDERR_FILENO, ": ", 2);
 	print_number(errorcount);

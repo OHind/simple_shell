@@ -4,11 +4,12 @@
  * @a: array to be freed
  * Return: void
  */
-void free_array(char **a)
+void free_array(__attribute__((unused)) char **a)
 {
-	size_t i;
+	/*size_t i, l;
 
-	for (i = 0; **(a + i) != '\0'; i++)
-		free(*(a + i));
-	free(a);
+	l = _strlen(*a);
+	for (i = 0; i < l; i++)
+		free(a[i]);
+	free(a);*/
 }

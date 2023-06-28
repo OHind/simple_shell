@@ -83,7 +83,7 @@ char **path_array(char **env)
 
 char *find_path(char **path_array, char *command)
 {
-	int i, j, ok_f = 0, ok_x = 0, dir_len, com_len, total_len;
+	int i, j, ok_f = 0, ok_x = 0, dir_len, k = 0, com_len, total_len;
 	char *path;
 
 	for (i = 0; path_array[i] != NULL; i++)
@@ -94,7 +94,11 @@ char *find_path(char **path_array, char *command)
 		path = malloc(sizeof(char) * (total_len + 2));
 		if (path == NULL)
 		{
-			free_array(path_array);
+			for (k = 0; k < _strlen(*path_array); k++)
+			{
+				free(path_array[k]);
+			}
+			/*free_array(path_array);*/
 			return (NULL);
 		}
 		j = 0;

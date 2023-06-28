@@ -1,5 +1,6 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,8 +26,7 @@ void print_env(char **env);
 void handle_command_error(char *NAME, char *command);
 void handle_exec_error(__attribute__((unused))char *NAME, char *command);
 void handle_access_error(char *NAME, char *command);
-void fork_wait_exec(char **commands, char **path_array, char **env,
-                    char *NAME, char *user_input);
+void fork_wait_exec(char **commands, char **path_array, char **env, char *NAME, char *user_input);
 int count_arg(char *input_user);
 char **input_parse(char *input_user, char **array, char *N);
 void print_number(int n);

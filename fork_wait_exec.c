@@ -30,7 +30,8 @@ void fork_wait_exec(char **commands, char **path_array, char **env,
 	else if (pid == 0)
 	{
 		exec_check = execve(commands[0], commands, env);
-
+		/* To be removed*/
+		printf("%d the result of exec function", exec_check);
 		if (exec_check < 0)
 		{
 			handle_exec_error(NAME, commands[0]);

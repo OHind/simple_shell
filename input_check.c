@@ -6,7 +6,7 @@
  */
 int check_input_path(char *input_user)
 {
-	if (*(input_user) == '/')
+	if (input_user[0] == '/')
 		return (0);
 	return (-1);
 }
@@ -17,7 +17,7 @@ int check_input_path(char *input_user)
  */
 int check_input_blank(char *input_user)
 {
-	if (*(input_user) == '\0')
+	if (input_user[0] == '\0')
 		return (1);
 	return (0);
 }
@@ -69,7 +69,7 @@ int check_input_exit(char *input_user, char *N)
 }
 
 /**
- * input_check_env - check if the user input is env
+ * check_input_env - check if the user input is env
  * @input_user: the input of the user
  * Return: 1 if the input equals env, 0 otherwise
  */
@@ -80,7 +80,7 @@ int check_input_env(char *input_user)
 
 	if (_strlen(input_user) != 4)
 		return (0);
-	while(*(e + i) != '\0')
+	while (*(e + i) != '\0')
 	{
 		if (*(e + i) != *(input_user + i))
 			return (0);
