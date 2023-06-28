@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
-* main - carries out the read, execute then print output loop
+* main - entry point of a program
 * @ac: argument count
 * @av: argument vector
 * @envp: environment vector
@@ -10,7 +10,7 @@
 
 int main(int ac, char **av, char *envp[])
 {
-	char *line = NULL, *pathcommand = NULL, *path = NULL;
+	char *l = NULL, *pathcommand = NULL, *path = NULL;
 	size_t bufsize = 0;
 	ssize_t linesize = 0;
 	char **command = NULL, **paths = NULL;
@@ -24,16 +24,16 @@ int main(int ac, char **av, char *envp[])
 		free_buffers(paths);
 		free(pathcommand);
 		prompt_user();
-		linesize = getline(&line, &bufsize, stdin);
+		linesize = getline(&l, &bufsize, stdin);
 		if (linesize < 0)
 			break;
 		info.ln_count++;
-		if (line[linesize - 1] == '\n')
-			line[linesize - 1] = '\0';
-		command = tokenizer(line);
+		if (l[linesize - 1] == '\n')
+			l[linesize - 1] = '\0';
+		command = tokenizer(l);
 		if (command == NULL || *command == NULL || **command == '\0')
 			continue;
-		if (checker(command, line))
+		if (checker(command, l))
 			continue;
 		path = find_path();
 		paths = tokenizer(path);
@@ -45,6 +45,6 @@ int main(int ac, char **av, char *envp[])
 	}
 	if (linesize < 0 && flags.interactive)
 		write(STDERR_FILENO, "\n", 1);
-	free(line);
+	free(l);
 	return (0);
 }
