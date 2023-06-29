@@ -34,7 +34,7 @@ int _strlen(char *s);
 int _strncmp(char *s1, char *s2, int n);
 char *_strdup(char *s);
 char *_strchr(char *s, char c);
-
+int _atoi(char *s);
 void execution(char *cp, char **cmd);
 char *find_path(void);
 

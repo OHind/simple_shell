@@ -11,15 +11,15 @@ void exit_cmd(char **command, char *line)
 {
 	int n = 0;
 
-	free(line);
 	if (command[1])
 	{
-		n = atoi(command[1]);
+		n = _atoi(command[1]);
 		if (n <= -1)
 			n = 2;
 		free_buffers(command);
 		exit(n);
 	}
-	free(command);
-	exit(n);
+	free(line);
+	free_buffers(command);
+	exit(0);
 }
