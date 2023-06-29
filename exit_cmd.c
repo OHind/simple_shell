@@ -16,10 +16,13 @@ void exit_cmd(char **command, char *line)
 		n = _atoi(command[1]);
 		if (n <= -1)
 			n = 2;
-		free_buffers(command);
-		exit(n);
+		else
+		{
+			free_buffers(command);
+			n = 0;
+		}
 	}
 	free(line);
 	free_buffers(command);
-	exit(0);
+	exit(n);
 }
