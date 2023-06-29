@@ -1,61 +1,67 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
+#include <string.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <stddef.h>
 #include <sys/stat.h>
-#include <time.h>
-#include <stdbool.h>
+#include <signal.h>
 
-/* environment variables */
-extern char **environ;
-extern __sighandler_t signal(int __sig, __sighandler_t __handler);
-
-/* handle built ins */
-int checker(char **cmd, char *buf);
-void prompt_user(void);
-void handle_signal(int m);
-char **tokenizer(char *line);
-char *test_path(char **path, char *command);
-char *append_path(char *path, char *command);
-int handle_builtin(char **command, char *line);
-void exit_cmd(char **command, char *line);
-
-void print_env(void);
-
-/* string handlers */
-int _strcmp(char *s1, char *s2);
+int _putchar(char c);
+void _puts(char *str);
 int _strlen(char *s);
-int _strncmp(char *s1, char *s2, int n);
-char *_strdup(char *s);
-char *_strchr(char *s, char c);
+char *_strdup(char *str);
+char *concat_all(char *name, char *sep, char *value);
+
+char **splitstring(char *str, const char *delim);
+void execute(char **argv);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+
+
+extern char **environ;
+
+/**
+ * struct list_path - Linked list containing PATH directories
+ * @dir: directory in path
+ * @p: pointer to next node
+ */
+typedef struct list_path
+{
+	char *dir;
+	struct list_path *p;
+} list_path;
+
+
+char *_getenv(const char *name);
+list_path *add_node_end(list_path **head, char *str);
+list_path *linkpath(char *path);
+char *_which(char *filename, list_path *head);
+
+/**
+ * struct mybuild - pointer to function with corresponding buildin command
+ * @name: buildin command
+ * @func: execute the buildin command
+ */
+typedef struct mybuild
+{
+	char *name;
+	void (*func)(char **);
+} mybuild;
+
+void(*checkbuild(char **arv))(char **arv);
 int _atoi(char *s);
-void execution(char *cp, char **cmd);
-char *find_path(void);
+void exitt(char **arv);
+void env(char **arv);
+void _setenv(char **arv);
+void _unsetenv(char **arv);
 
-/* helper function for efficient free */
-void free_buffers(char **buf);
+void freearv(char **arv);
+void free_list(list_path *head);
 
-struct builtin
-{
-	char *env;
-	char *exit;
-} builtin;
 
-struct info
-{
-	int final_exit;
-	int ln_count;
-} info;
-
-struct flags
-{
-	bool interactive;
-} flags;
-
-#endif /* SHELL_H */
+#endif
